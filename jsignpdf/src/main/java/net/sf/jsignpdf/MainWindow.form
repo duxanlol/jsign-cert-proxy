@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="net.sf.jsignpdf.MainWindow">
+  <grid id="27dc6" binding="panel1" default-binding="true" layout-manager="BorderLayout" hgap="0" vgap="0">
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <scrollpane id="ad475">
+        <constraints border-constraint="West"/>
+        <properties>
+          <maximumSize width="200" height="32767"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="bef77" class="javax.swing.JList" binding="list1" custom-create="true" default-binding="true">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <grid id="cd289" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints border-constraint="Center"/>
+        <properties/>
+        <border type="none"/>
+        <children/>
+      </grid>
+      <toolbar id="33067">
+        <constraints border-constraint="North"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="8151" class="javax.swing.JButton" binding="button1" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <component id="23d86" class="javax.swing.JButton" binding="button2" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <component id="4112c" class="javax.swing.JButton" binding="button3" default-binding="true">
+            <constraints/>
+            <properties>
+              <text value="Button"/>
+            </properties>
+          </component>
+          <component id="388bd" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </toolbar>
+      <toolbar id="4e5fb">
+        <constraints border-constraint="South"/>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="17b5b" class="javax.swing.JButton" binding="button4" default-binding="true">
+            <constraints/>
+            <properties>
+              <alignmentX value="0.0"/>
+              <alignmentY value="0.5"/>
+              <horizontalAlignment value="0"/>
+              <horizontalTextPosition value="0"/>
+              <selected value="false"/>
+              <text value="Button"/>
+              <verticalAlignment value="0"/>
+            </properties>
+          </component>
+        </children>
+      </toolbar>
+    </children>
+  </grid>
+</form>
