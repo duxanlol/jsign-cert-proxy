@@ -149,7 +149,7 @@ public class SignPdfForm extends javax.swing.JFrame implements SignResultListene
         LOGGER.addHandler(textHandler);
 
         updateFromOptions();
-
+        System.out.println(options);
         TransferHandler handler = new TransferHandler() {
             @Override
             public boolean canImport(TransferHandler.TransferSupport info) {

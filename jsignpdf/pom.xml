@@ -12,6 +12,8 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
+
+
     <properties>
         <exec.mainClass>net.sf.jsignpdf.Signer</exec.mainClass>
     </properties>
@@ -104,12 +106,30 @@
             <groupId>com.github.kwart.jsign</groupId>
             <artifactId>jsign-pkcs11</artifactId>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.miglayout/miglayout -->
         <dependency>
-            <groupId>com.miglayout</groupId>
-            <artifactId>miglayout</artifactId>
-            <version>3.7.4</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.20</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.core/jersey-client -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>3.1.0-M3</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+            <version>3.0.5</version>
+        </dependency>
+
+
 
     </dependencies>
 </project>

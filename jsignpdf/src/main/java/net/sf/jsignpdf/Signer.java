@@ -64,7 +64,7 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * JSignPdf main class - it either process command line or if no argument is given, sets system Look&Feel and creates
+ * JSignPdf main class - it either processes command line or if no argument is given, sets system Look&Feel and creates
  * SignPdfForm GUI.
  *
  * @author Josef Cacek
@@ -89,7 +89,7 @@ public class Signer {
      */
     public static void main(String[] args) {
         SignerOptionsFromCmdLine tmpOpts = null;
-
+        System.out.println(tmpOpts);
         if (args != null && args.length > 0) {
             tmpOpts = new SignerOptionsFromCmdLine();
             parseCommandLine(args, tmpOpts);
@@ -156,6 +156,7 @@ public class Signer {
             } catch (Exception e) {
                 System.err.println("Can't set Look&Feel.");
             }
+            System.out.println(tmpOpts);
             SignPdfForm tmpForm = new SignPdfForm(WindowConstants.EXIT_ON_CLOSE, tmpOpts);
             tmpForm.pack();
             GuiUtils.center(tmpForm);

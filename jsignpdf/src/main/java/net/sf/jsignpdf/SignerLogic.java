@@ -125,10 +125,10 @@ public class SignerLogic implements Runnable {
      */
     public boolean signFile() {
         final String outFile = options.getOutFileX();
-        if (!validateInOutFiles(options.getInFile(), outFile)) {
-            LOGGER.info(RES.get("console.skippingSigning"));
-            return false;
-        }
+//        if (!validateInOutFiles(options.getInFile(), outFile)) {
+//            LOGGER.info(RES.get("console.skippingSigning"));
+//            return false;
+//        }
 
         boolean finished = false;
         Throwable tmpException = null;
@@ -164,13 +164,16 @@ public class SignerLogic implements Runnable {
             LOGGER.info(RES.get("console.createPdfReader", options.getInFile()));
             PdfReader reader;
             try {
-                reader = new PdfReader(options.getInFile(), options.getPdfOwnerPwdStrX().getBytes());
+                reader = new PdfReader(options.getInFileBytes(), options.getPdfOwnerPwdStrX().getBytes());
+//                reader = new PdfReader(options.getInFile(), options.getPdfOwnerPwdStrX().getBytes());
             } catch (Exception e) {
                 try {
-                    reader = new PdfReader(options.getInFile(), new byte[0]);
+//                    reader = new PdfReader(options.getInFile(), new byte[0]);
+                      reader = new PdfReader(options.getInFileBytes(), new byte[0]);
                 } catch (Exception e2) {
                     // try to read without password
-                    reader = new PdfReader(options.getInFile());
+//                    reader = new PdfReader(options.getInFile());
+                      reader = new PdfReader(options.getInFileBytes());
                 }
             }
 

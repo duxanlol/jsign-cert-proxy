@@ -61,13 +61,13 @@ public class PdfExtraInfo {
         PdfReader reader = null;
         try {
             try {
-                reader = new PdfReader(options.getInFile(), options.getPdfOwnerPwdStrX().getBytes());
+                reader = new PdfReader(options.getInFileBytes(), options.getPdfOwnerPwdStrX().getBytes());
             } catch (Exception e) {
                 try {
-                    reader = new PdfReader(options.getInFile(), new byte[0]);
+                    reader = new PdfReader(options.getInFileBytes(), new byte[0]);
                 } catch (Exception e2) {
                     // try to read without password
-                    reader = new PdfReader(options.getInFile());
+                    reader = new PdfReader(options.getInFileBytes());
                 }
             }
             tmpResult = reader.getNumberOfPages();
@@ -95,7 +95,7 @@ public class PdfExtraInfo {
         PageInfo tmpResult = null;
         PdfReader reader = null;
         try {
-            reader = PdfUtils.getPdfReader(options.getInFile(), options.getPdfOwnerPwdStrX().getBytes());
+            reader = PdfUtils.getPdfReader(options.getInFileBytes(), options.getPdfOwnerPwdStrX().getBytes());
             final Rectangle tmpRect = reader.getPageSizeWithRotation(aPage);
             if (tmpRect != null) {
                 tmpResult = new PageInfo(tmpRect.getRight(), tmpRect.getTop());

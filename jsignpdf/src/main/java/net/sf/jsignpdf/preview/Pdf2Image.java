@@ -208,10 +208,9 @@ public class Pdf2Image {
         PDDocument tmpDoc = null;
 
         try {
-            File tmpFile = new File(options.getInFile());
             tmpDoc = options.getCertLevelX() != CertificationLevel.NOT_CERTIFIED
-                    ? PDDocument.load(tmpFile, options.getPdfOwnerPwdStrX())
-                    : PDDocument.load(tmpFile);
+                    ? PDDocument.load(options.getInFileBytes(), options.getPdfOwnerPwdStrX())
+                    : PDDocument.load(options.getInFileBytes());
             int resolution;
             try {
                 resolution = Toolkit.getDefaultToolkit().getScreenResolution();

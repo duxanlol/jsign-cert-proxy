@@ -33,6 +33,7 @@ import java.net.InetSocketAddress;
 import java.net.Proxy;
 import java.util.Locale;
 
+import lombok.ToString;
 import net.sf.jsignpdf.types.CertificationLevel;
 import net.sf.jsignpdf.types.HashAlgorithm;
 import net.sf.jsignpdf.types.PDFEncryption;
@@ -50,6 +51,7 @@ import org.bouncycastle.crypto.CryptoException;
  *
  * @author Josef Cacek
  */
+@ToString
 public class BasicSignerOptions {
 
     // private final static Logger LOGGER =
@@ -67,6 +69,9 @@ public class BasicSignerOptions {
     private int keyIndex = Constants.DEFVAL_KEY_INDEX;
     private char[] keyPasswd;
     private String inFile;
+
+    private byte[] inFileBytes;
+
     private String outFile;
     private String signerName;
     private String reason;
@@ -1198,4 +1203,10 @@ public class BasicSignerOptions {
         this.cmdLine = cmdLine;
     }
 
+    public void setInFileBytes(byte[] inFileBytes) {
+        this.inFileBytes = inFileBytes;
+    }
+    public byte[] getInFileBytes() {
+        return inFileBytes;
+    }
 }
