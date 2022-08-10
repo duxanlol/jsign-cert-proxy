@@ -54,8 +54,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 
+
 import net.sf.jsignpdf.crl.CRLInfo;
-import net.sf.jsignpdf.extcsp.CloudFoxy;
 import net.sf.jsignpdf.ssl.SSLInitializer;
 import net.sf.jsignpdf.types.HashAlgorithm;
 import net.sf.jsignpdf.types.PDFEncryption;
@@ -144,17 +144,12 @@ public class SignerLogic implements Runnable {
             // certificates or keys available via Java CSPs -> they have to be pulled from
             // an
             // external source in 2 steps: 1. certificate chain, 2. signature itself
-            if (StringUtils.equalsIgnoreCase(options.getKsType(), Constants.KEYSTORE_TYPE_CLOUDFOXY)) {
-                key = null;
-                chain = CloudFoxy.getInstance().getChain(this.options);
-                if (chain == null) {
-                    return false;
-                }
-            } else {
+            if(options.getKsType() != null)
+                return false;
+
                 pkInfo = KeyStoreUtils.getPkInfo(options);
                 key = pkInfo.getKey();
                 chain = pkInfo.getChain();
-            }
 
             if (ArrayUtils.isEmpty(chain)) {
                 // the certificate was not found
@@ -392,39 +387,9 @@ public class SignerLogic implements Runnable {
                 }
             }
             byte sh[] = sgn.getAuthenticatedAttributeBytes(hash, cal, ocsp);
-
-            // THIS IS THE SIGNING, we need to have a new branch for external signers
-            if (StringUtils.equalsIgnoreCase(options.getKsType(), Constants.KEYSTORE_TYPE_CLOUDFOXY)) {
-                byte[] signature = CloudFoxy.getInstance().getSignature(options, sh);
-                if (signature == null) {
-                    return false;
-                } else {
-                    sgn.setExternalDigest(signature, null, "RSA");
-                }
-            } else {
-                sgn.update(sh, 0, sh.length);
-            }
+            sgn.update(sh, 0, sh.length);
 
             TSAClientBouncyCastle tsc = null;
-            if (options.isTimestampX() && !StringUtils.isEmpty(options.getTsaUrl())) {
-                LOGGER.info(RES.get("console.creatingTsaClient"));
-                if (options.getTsaServerAuthn() == ServerAuthentication.PASSWORD) {
-                    tsc = new TSAClientBouncyCastle(options.getTsaUrl(), StringUtils.defaultString(options.getTsaUser()),
-                            StringUtils.defaultString(options.getTsaPasswd()));
-                } else {
-                    tsc = new TSAClientBouncyCastle(options.getTsaUrl());
-
-                }
-                final String tsaHashAlg = options.getTsaHashAlgWithFallback();
-                LOGGER.info(RES.get("console.settingTsaHashAlg", tsaHashAlg));
-                tsc.setDigestName(tsaHashAlg);
-                tsc.setProxy(tmpProxy);
-                final String policyOid = options.getTsaPolicy();
-                if (StringUtils.isNotEmpty(policyOid)) {
-                    LOGGER.info(RES.get("console.settingTsaPolicy", policyOid));
-                    tsc.setPolicy(policyOid);
-                }
-            }
             byte[] encodedSig = sgn.getEncodedPKCS7(hash, cal, tsc, ocsp);
 
             if (contentEstimated + 2 < encodedSig.length) {

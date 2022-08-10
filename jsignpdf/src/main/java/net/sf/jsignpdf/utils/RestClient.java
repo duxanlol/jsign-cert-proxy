@@ -1,18 +1,14 @@
 package net.sf.jsignpdf.utils;
 
 import jakarta.ws.rs.client.*;
-import jakarta.ws.rs.core.Form;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
-import net.sf.jsignpdf.types.MultipartUploadForm;
-import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.glassfish.jersey.media.multipart.MultiPart;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.media.multipart.file.FileDataBodyPart;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class RestClient {
 
@@ -52,7 +48,7 @@ public class RestClient {
 
     public static void main(String[] args) throws IOException {
         RestClient client = new RestClient();
-        client.uploadSignedDocument("C:\\opt\\test\\asdf.pdf");
+//        client.uploadSignedDocument("C:\\opt\\test\\asdf.pdf");
 
     }
 }

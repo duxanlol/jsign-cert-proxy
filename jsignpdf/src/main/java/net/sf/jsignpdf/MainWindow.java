@@ -82,7 +82,7 @@ public class MainWindow {
 
                 frame.dispose();
 
-                anOptions.setOutFile("C:\\opt\\test\\signed_" + documentIdentifier);
+                anOptions.setOutFile("/home/dusan/dsplatform/test/signed_" + documentIdentifier);
                 final Set<String> tmpKsTypes = KeyStoreUtils.getKeyStores();
                 if (tmpKsTypes.contains(Constants.KEYSTORE_TYPE_WINDOWS_MY)) {
                     anOptions.setKsType(Constants.KEYSTORE_TYPE_WINDOWS_MY);

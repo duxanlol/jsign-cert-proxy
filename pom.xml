@@ -36,8 +36,6 @@
 
     <modules>
         <module>jsignpdf</module>
-        <module>installcert</module>
-        <module>distribution</module>
     </modules>
 
     <dependencyManagement>
