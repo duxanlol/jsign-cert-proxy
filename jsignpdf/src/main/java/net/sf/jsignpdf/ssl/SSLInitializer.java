@@ -49,7 +49,6 @@ import javax.net.ssl.TrustManager;
 
 import net.sf.jsignpdf.BasicSignerOptions;
 import net.sf.jsignpdf.Constants;
-import net.sf.jsignpdf.types.ServerAuthentication;
 import net.sf.jsignpdf.utils.KeyStoreUtils;
 
 import org.apache.commons.lang3.StringUtils;

@@ -39,10 +39,8 @@ import net.sf.jsignpdf.types.HashAlgorithm;
 import net.sf.jsignpdf.types.PDFEncryption;
 import net.sf.jsignpdf.types.PrintRight;
 import net.sf.jsignpdf.types.RenderMode;
-import net.sf.jsignpdf.types.ServerAuthentication;
 import net.sf.jsignpdf.utils.PropertyProvider;
 
-import org.apache.commons.cli.ParseException;
 import org.apache.commons.lang3.StringUtils;
 import org.bouncycastle.crypto.CryptoException;
 
