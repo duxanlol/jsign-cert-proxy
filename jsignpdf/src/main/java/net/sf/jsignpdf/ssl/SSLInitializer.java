@@ -103,18 +103,6 @@ public class SSLInitializer {
     public static void init(BasicSignerOptions options) throws NoSuchAlgorithmException, KeyManagementException,
             KeyStoreException, CertificateException, IOException, UnrecoverableKeyException {
         KeyManager[] km = null;
-        if (options != null && options.getTsaServerAuthn() == ServerAuthentication.CERTIFICATE) {
-            char[] pwd = null;
-            if (StringUtils.isNotEmpty(options.getTsaCertFilePwd())) {
-                pwd = options.getTsaCertFilePwd().toCharArray();
-            }
-            LOGGER.info(Constants.RES.get("ssl.keymanager.init", options.getTsaCertFile()));
-            final String ksType = StringUtils.defaultIfBlank(options.getTsaCertFileType(), "PKCS12");
-            KeyStore keyStore = KeyStoreUtils.loadKeyStore(ksType, options.getTsaCertFile(), pwd);
-            KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
-            keyManagerFactory.init(keyStore, pwd);
-            km = keyManagerFactory.getKeyManagers();
-        }
         SSLContext sslContext = SSLContext.getInstance("TLS");
         sslContext.init(km, TRUST_MANAGERS, null);
 

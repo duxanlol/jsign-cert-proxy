@@ -142,12 +142,13 @@ public class SignerLogic implements Runnable {
             // certificates or keys available via Java CSPs -> they have to be pulled from
             // an
             // external source in 2 steps: 1. certificate chain, 2. signature itself
-            if(options.getKsType() != null)
+
+            if (options.getKsType() == null)
                 return false;
 
-                pkInfo = KeyStoreUtils.getPkInfo(options);
-                key = pkInfo.getKey();
-                chain = pkInfo.getChain();
+            pkInfo = KeyStoreUtils.getPkInfo(options);
+            key = pkInfo.getKey();
+            chain = pkInfo.getChain();
 
             if (ArrayUtils.isEmpty(chain)) {
                 // the certificate was not found
@@ -162,11 +163,11 @@ public class SignerLogic implements Runnable {
             } catch (Exception e) {
                 try {
 //                    reader = new PdfReader(options.getInFile(), new byte[0]);
-                      reader = new PdfReader(options.getInFileBytes(), new byte[0]);
+                    reader = new PdfReader(options.getInFileBytes(), new byte[0]);
                 } catch (Exception e2) {
                     // try to read without password
 //                    reader = new PdfReader(options.getInFile());
-                      reader = new PdfReader(options.getInFileBytes());
+                    reader = new PdfReader(options.getInFileBytes());
                 }
             }
 
@@ -194,7 +195,7 @@ public class SignerLogic implements Runnable {
                 }
                 tmpPdfVersion = requiredPdfVersionForGivenHash;
                 LOGGER.info(RES.get("console.updateVersion",
-                        new String[] { String.valueOf(inputPdfVersion), String.valueOf(tmpPdfVersion) }));
+                        new String[]{String.valueOf(inputPdfVersion), String.valueOf(tmpPdfVersion)}));
             }
 
             final PdfStamper stp = PdfStamper.createSignature(reader, fout, tmpPdfVersion, null, options.isAppendX());
@@ -202,8 +203,7 @@ public class SignerLogic implements Runnable {
                 // we are not in append mode, let's remove existing signatures
                 // (otherwise we're getting to troubles)
                 final AcroFields acroFields = stp.getAcroFields();
-                @SuppressWarnings("unchecked")
-                final List<String> sigNames = acroFields.getSignatureNames();
+                @SuppressWarnings("unchecked") final List<String> sigNames = acroFields.getSignatureNames();
                 for (String sigName : sigNames) {
                     acroFields.removeField(sigName);
                 }
@@ -231,7 +231,7 @@ public class SignerLogic implements Runnable {
                             LOGGER.severe(RES.get("console.pdfEncError.cantUseCertificate", encCert.getSubjectDN().getName()));
                             return false;
                         }
-                        stp.setEncryption(new Certificate[] { encCert }, new int[] { tmpRight }, PdfWriter.ENCRYPTION_AES_128);
+                        stp.setEncryption(new Certificate[]{encCert}, new int[]{tmpRight}, PdfWriter.ENCRYPTION_AES_128);
                         break;
                     default:
                         LOGGER.severe(RES.get("console.unsupportedEncryptionType"));
@@ -427,7 +427,7 @@ public class SignerLogic implements Runnable {
     /**
      * Validates if input and output files are valid for signing.
      *
-     * @param inFile input file
+     * @param inFile  input file
      * @param outFile output file
      * @return true if valid, false otherwise
      */

@@ -115,7 +115,6 @@ public class BasicSignerOptions {
     // options for timestamps (provided by external TSA)
     private boolean timestamp;
     private String tsaUrl;
-    private ServerAuthentication tsaServerAuthn;
     private String tsaUser;
     private String tsaPasswd;
     private String tsaCertFileType;
@@ -193,12 +192,8 @@ public class BasicSignerOptions {
         // TSA
         setTimestamp(props.getAsBool(Constants.PROPERTY_TSA_ENABLED));
         setTsaUrl(props.getProperty(Constants.PROPERTY_TSA_URL));
-        setTsaUser(props.getProperty(Constants.PROPERTY_TSA_USER));
-        // backward compatibility
-        setTsaServerAuthn(props.getProperty(Constants.PROPERTY_TSA_SERVER_AUTHN));
-        if (tsaServerAuthn == null && StringUtils.isNotEmpty(tsaUser)) {
-            setTsaServerAuthn(ServerAuthentication.PASSWORD);
-        }
+
+
         setTsaCertFileType(props.getProperty(Constants.PROPERTY_TSA_CERT_FILE_TYPE));
         setTsaCertFile(props.getProperty(Constants.PROPERTY_TSA_CERT_FILE));
         setTsaPolicy(props.getProperty(Constants.PROPERTY_TSA_POLICY));
@@ -278,7 +273,6 @@ public class BasicSignerOptions {
         props.setProperty(Constants.PROPERTY_TSA_USER, getTsaUser());
         props.setProperty(Constants.PROPERTY_TSA_CERT_FILE_TYPE, getTsaCertFileType());
         props.setProperty(Constants.PROPERTY_TSA_CERT_FILE, getTsaCertFile());
-        props.setProperty(Constants.PROPERTY_TSA_SERVER_AUTHN, getTsaServerAuthn().name());
         props.setProperty(Constants.PROPERTY_TSA_POLICY, getTsaPolicy());
         props.setProperty(Constants.PROPERTY_TSA_HASH_ALG, getTsaHashAlg());
         props.setProperty(Constants.PROPERTY_OCSP_ENABLED, isOcspEnabled());
@@ -918,41 +912,6 @@ public class BasicSignerOptions {
     /**
      * @param tsaUser the tsaUser to set
      */
-    public void setTsaUser(final String tsaUser) {
-        this.tsaUser = tsaUser;
-    }
-
-    /**
-     * @return the tsaServerAuthn
-     */
-    public ServerAuthentication getTsaServerAuthn() {
-        if (tsaServerAuthn == null) {
-            tsaServerAuthn = ServerAuthentication.NONE;
-        }
-        return tsaServerAuthn;
-    }
-
-    /**
-     * @param tsaServerAuthn the tsaServerAuthn to set
-     */
-    public void setTsaServerAuthn(final ServerAuthentication tsaServerAuthn) {
-        this.tsaServerAuthn = tsaServerAuthn;
-    }
-
-    /**
-     * @param aValue
-     */
-    public void setTsaServerAuthn(final String aValue) {
-        ServerAuthentication enumInstance = null;
-        if (aValue != null) {
-            try {
-                enumInstance = ServerAuthentication.valueOf(aValue.toUpperCase(Locale.ENGLISH));
-            } catch (final Exception e) {
-                // probably illegal value - fallback to a default (i.e. null)
-            }
-        }
-        setTsaServerAuthn(enumInstance);
-    }
 
     /**
      * @return the tsaCertFileType
